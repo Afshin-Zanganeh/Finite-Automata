@@ -14,7 +14,11 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    
+    <script src = "./DFA.js"></script>
+
+    <script src = "./NFA.js"></script>
+
+    <script src = "./main.js"></script>
 
 </head>
 <body>
@@ -78,115 +82,6 @@
     </div>
 
   </div>
-
-  
- 
-  <script>
-
-    class DFA
-    {
-      constructor(states,alphabet,final_states,grammer)
-      {
-        debugger;
-        this.states = states;
-        this.alphabet = alphabet;
-        this.final_states = final_states;
-        this.grammer = grammer;
-        this.graph = this.CreateGraph();
-      }
-
-      CreateGraph()
-      {
-        var graph = {};
-        for(var x in this.grammer)
-        {
-          var rule = this.grammer[x].split(",")
-          if(this.final_states.includes(rule[1]))
-          {
-            try
-            {
-              graph[rule[0]].push([rule[1],rule[2],1]);
-            }
-            catch(err)
-            {
-              graph[rule[0]] =[ [rule[1],rule[2],1] ];
-            }
-          }
-          else
-          {
-            try
-            {
-              graph[rule[0]].push([rule[1],rule[2],0]);
-            }
-            catch(err)
-            {
-              graph[rule[0]] =[ [rule[1],rule[2],0] ];
-            }
-          }
-        }
-        return graph;
-      }
-
-      IsAcceptedByDFA(string)
-      {
-        var current_state = this.states[0];
-        for (var i in string)
-        {
-          var flag = false;
-          var ways = this.graph[current_state];
-          for(var j in ways)
-          {
-            if(string[i] == ways[j][1])
-            {
-              flag = true;
-              current_state = ways[j][0];
-              break;
-            }
-          }
-        }
-
-        if(flag == true)
-        {
-          return true;
-        }
-
-        return false
-      }
-
-      MakeSimpleDFA()
-      {
-        return true
-      }
-
-      ShowSchematicDFA()
-      {
-        return true
-      }
-
-    }
-
-    class NFA extends DFA
-    {
-      //
-    }
-
-    function main()
-    {
-      var data = document.forms["form"];
-      var string = data["String"].value;
-      var dfa = new DFA(data["states"].value.split(","), data["alphabet"].value.split(","), data["FinalStates"].value.split(","), data["GrammerRules"].value.split("\n"));
-      console.log(dfa.graph);
-      alert(dfa.states);
-      alert(dfa.IsAcceptedByDFA(string));
-      
-      return true;
-    }
-
-
-
-    
-  </script>
-
 
 </body>
 </html>
