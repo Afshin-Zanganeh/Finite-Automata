@@ -1,4 +1,0 @@
-class NFA extends DFA
-{
-  //
-}
