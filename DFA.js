@@ -42,31 +42,37 @@ class DFA
     return graph;
   }
 
-  IsAcceptedByDFA(string)
-  {
-    var current_state = this.states[0];
-    for (var i in string)
+ IsAcceptedByDFA(string)
+ {
+   var current_state = this.states[0];
+   var flag = true;
+   var ways;
+   for (var i in string)
+   {
+    // in each step flag should be true to be sure thst for each letter we have a way from current state to another state if we dont have DFA rejects esle we continue
+    if(!flag)
     {
-      var flag = false;
-      var ways = this.graph[current_state];
-      for(var j in ways)
+      break;
+    }
+
+    flag = false;
+    ways = this.graph[current_state];
+    for(var j in ways)
+    {
+      if(string[i] == ways[j][1])
       {
-        if(string[i] == ways[j][1])
-        {
-          flag = true;
-          current_state = ways[j][0];
-          break;
-        }
+        flag = true;
+        current_state = ways[j][0];
+        break;
       }
     }
-
-    if(flag == true)
-    {
-      return true;
-    }
-
-    return false
-  }
+   }
+   if(flag == true)
+   {
+     return true;
+   }
+   return false
+ }
 
   MakeSimpleDFA()
   {
@@ -113,7 +119,8 @@ class DFA
   }
   
   
-  draw() {
+  draw() 
+  {
     let states = document.getElementById("States").value
     states = states.split(",")
     let initialState = states[0]
@@ -145,3 +152,7 @@ class DFA
   }
 
 }
+
+
+
+
