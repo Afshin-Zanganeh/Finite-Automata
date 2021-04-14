@@ -80,8 +80,8 @@ class DFA
 
 
 
-  
-  buildDotData(transitions, initialState, finalStates) {
+  buildDotData(transitions, initialState, finalStates)
+  {
     let res = `digraph {
       node [shape=circle fontsize=30]
       edge [length=200, color=gray, fontcolor=black]`

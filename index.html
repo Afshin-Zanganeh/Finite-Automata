@@ -30,61 +30,56 @@
     <form name="form">
       <div class="form-group">
         <label for="States">States</label>
-        <input type="text" class="form-control" id="States" name="states" placeholder="States" required>
+        <input type="text" class="form-control" style="border-color:green;" id="States" name="states" placeholder="States" required>
       </div>
       <div class="form-group">
         <label for="Alphabet">Alphabet</label>
-        <input type="text" class="form-control" id="Alphabet" name="alphabet" placeholder="Alphabet" required>
+        <input type="text" class="form-control" style="border-color:green;" id="Alphabet" name="alphabet" placeholder="Alphabet" required>
       </div>      
       <div class="form-group">
         <label for="FinalStates">Final States</label>
-        <input type="text" class="form-control" id="FinalStates" name="FinalStates" placeholder="Final States" required>
+        <input type="text" class="form-control" style="border-color:green;" id="FinalStates" name="FinalStates" placeholder="Final States" required>
       </div> 
       <div class="form-group">
         <label for="NumberOfRules">Number of Rules</label>
-        <input type="text" class="form-control" id="NumberOfRules" name="NumberOfRules" placeholder="Number of Rules" required>
+        <input type="text" class="form-control" style="border-color:green;" id="NumberOfRules" name="NumberOfRules" placeholder="Number of Rules" required>
       </div> 
       <div class="form-group">
         <label for="GrammerRules">Grammer Rules</label>
-        <textarea rows="5" class="form-control" id="GrammerRules" name="GrammerRules" placeholder="Grammer Rules" required></textarea>
+        <textarea rows="5" class="form-control" style="border-color:green;" id="GrammerRules" name="GrammerRules" placeholder="Grammer Rules" required></textarea>
       </div>
       <div class="form-group">
         <label for="String">Your String</label>
-        <textarea rows="1" class="form-control" id="String" name="String" placeholder="Your String" required></textarea>
+        <textarea rows="1" class="form-control" style="border-color:green;" id="String" name="String" placeholder="Your String" required></textarea>
       </div>
     </form>
-    <button  class="btn btn-success btn-block" onclick="return main()">Submit</button>
-
+    
+    <div  style="margin-top: 80px; margin-bottom: 40px; border:1px solid green; padding:20px; border-radius:25px;">
+      <label>DFA</lable><br><br>
+        
+        <form name="FA" id="FA">
+          <input type="radio" id="IsAcceptedByDFA" name="FAMethod" value="IsAcceptedByDFA">
+          <label for="IsAcceptedByDFA">Is Accepted By DFA ?</label><br>
+          <input type="radio" id="MakeSimpleDFA" name="FAMethod" value="MakeSimpleDFA">
+          <label for="MakeSimpleDFA">Make Simple DFA</label><br>
+          <input type="radio" id="ShowSchematicDFA" name="FAMethod" value="ShowSchematicDFA">
+          <label for="other">Show Schematic DFA</label><br>
+          
+          <label style="margin-top: 60px;">NFA</lable><br><br>
+            <input type="radio" id="IsAcceptedByNFA" name="FAMethod" value="IsAcceptedByNFA">
+            <label for="IsAcceptedByNFA">Is Accepted By NFA ?</label><br>
+            <input type="radio" id="CreateEquivalenceDFA" name="FAMethod" value="CreateEquivalenceDFA">
+            <label for="MakeSimpleDFA">Create Equivalence DFA</label><br>
+            <input type="radio" id="FindRegExp" name="FAMethod" value="FindRegExp">
+            <label for="other">Find RegExp</label><br>
+            <input type="radio" id="ShowSchematicNFA" name="FAMethod" value="ShowSchematicNFA">
+            <label for="other">Show Schematic NFA</label>
+          </form>
+      </div>
+      <button  class="btn btn-success btn-block" style="margin-top: 20px; margin-bottom: 30px;" onclick="return main();">Run</button>
+        
     <div id="graphContainer"></div>
 
-    <div id="DFA" style="margin-top: 80px;">
-      <label>DFA</lable><br><br>
-
-      <form name="DFA">
-        <input type="radio" id="IsAcceptedByDFA" name="FAMethod" value="IsAcceptedByDFA">
-        <label for="IsAcceptedByDFA">Is Accepted By DFA ?</label><br>
-        <input type="radio" id="MakeSimpleDFA" name="FAMethod" value="MakeSimpleDFA">
-        <label for="MakeSimpleDFA">Make Simple DFA</label><br>
-        <input type="radio" id="ShowSchematicDFA" name="FAMethod" value="ShowSchematicDFA">
-        <label for="other">Show Schematic DFA</label>
-      </form>
-    </div>
-
-    <div id="NFA" style="margin-top: 80px; margin-bottom: 40px;">
-      <label>NFA</lable><br><br>
-        
-      <form name="NFA">
-        <input type="radio" id="IsAcceptedByNFA" name="FAMethod" value="IsAcceptedByNFA">
-        <label for="IsAcceptedByNFA">Is Accepted By NFA ?</label><br>
-        <input type="radio" id="CreateEquivalenceDFA" name="FAMethod" value="CreateEquivalenceDFA">
-        <label for="MakeSimpleDFA">Create Equivalence DFA</label><br>
-        <input type="radio" id="FindRegExp" name="FAMethod" value="FindRegExp">
-        <label for="other">Find RegExp</label><br>
-        <input type="radio" id="ShowSchematicNFA" name="FAMethod" value="ShowSchematicNFA">
-        <label for="other">Show Schematic NFA</label>
-      </form>
-    </div>
-    
   </div>
 
 </body>

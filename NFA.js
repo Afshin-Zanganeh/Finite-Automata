@@ -1,10 +1,18 @@
 class NFA extends DFA {
-  
-  isAcceptByNFA(inputString) {
+ 
+  isAcceptByNFA(inputString) 
+  {
     console.log(this.states)
   }
-  createEquivalentDFA() {
 
+
+  createEquivalentDFA() 
+  {
+    //
+  }
+
+  FindRegExp()
+  {
+    //
   }
 }
-
