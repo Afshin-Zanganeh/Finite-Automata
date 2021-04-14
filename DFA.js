@@ -75,9 +75,7 @@ class DFA
 
   ShowSchematicDFA()
   {
-    return true
+    draw();
   }
 
 }
-
-

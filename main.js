@@ -9,4 +9,3 @@ function main()
   // alert(dfa.IsAcceptedByDFA(string));
   
 }
-
