@@ -1,21 +1,21 @@
 class DFA
 {
-  constructor(states,alphabet,final_states,grammer)
+  constructor(states,alphabets,final_states,transitions)
   {
     debugger;
     this.states = states;
-    this.alphabet = alphabet;
+    this.alphabets = alphabets;
     this.final_states = final_states;
-    this.grammer = grammer;
+    this.transitions = transitions;
     this.graph = this.CreateGraph();
   }
 
   CreateGraph()
   {
     var graph = {};
-    for(var x in this.grammer)
+    for(var x in this.transitions)
     {
-      var rule = this.grammer[x].split(",")
+      var rule = this.transitions[x].split(",")
       if(this.final_states.includes(rule[1]))
       {
         try
@@ -124,12 +124,12 @@ class DFA
     let states = document.getElementById("States").value
     states = states.split(",")
     let initialState = states[0]
-    let alphabets = document.getElementById("Alphabet").value
+    let alphabets = document.getElementById("Alphabets").value
     alphabets = alphabets.split(",")
     let finalStates = document.getElementById("FinalStates").value
     finalStates = finalStates.split(",")
     let numberOfTransitions = document.getElementById("NumberOfRules").value
-    let transitions = document.getElementById("GrammerRules").value
+    let transitions = document.getElementById("Transitions").value
     transitions = transitions.split("\n")
   
   
