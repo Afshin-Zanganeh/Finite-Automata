@@ -2,7 +2,6 @@ class DFA
 {
   constructor(states,alphabets,final_states,transitions)
   {
-    debugger;
     this.states = states;
     this.alphabets = alphabets;
     this.final_states = final_states;

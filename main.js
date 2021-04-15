@@ -3,7 +3,6 @@ function main()
   var data = document.forms["form"];
   var string = data["String"].value;
   var nfa = new NFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
-  debugger;
   
   if(document.getElementById("IsAcceptedByDFA").checked)
   {
@@ -21,7 +20,7 @@ function main()
 
   else if(document.getElementById("IsAcceptedByNFA").checked)
   {
-    alert(nfa.IsAcceptedByNFA(string));
+    alert(nfa.isAcceptByNFA(string));
   }
 
   else if(document.getElementById("CreateEquivalenceDFA").checked)
