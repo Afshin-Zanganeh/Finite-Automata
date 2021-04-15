@@ -29,14 +29,42 @@ class NFA {
       }
       this.graph[from].adjs.push([to, label])
     }
-    console.log(this.graph)
+  }
+
+  isAccept(inputString, currentState, charPos) {
+    if (charPos == inputString.length){
+      if(this.graph[currentState].isFinal){
+        return true
+      }else{
+        return false
+      }
+    }
+    let acceptFlag = false
+    let nextStates = []
+    let char = inputString[charPos]
+    this.graph[currentState].adjs.forEach(element => {
+      if (element[1] == char || element[1] == "lambda") {
+        nextStates.push(element)
+      }
+    });
+    if (nextStates.length == 0) {
+      return false
+    }
+    nextStates.forEach(element => {
+      if (element[1] == "lambda") {
+        acceptFlag = acceptFlag || this.isAccept(inputString, element[0], charPos)
+      }else{
+        acceptFlag = acceptFlag || this.isAccept(inputString, element[0], charPos+1)
+      }
+    });
+    return acceptFlag
   }
 
   isAcceptByNFA(inputString) {
-    for (let index = 0; index < inputString.length; index++) {
-      const element = inputString[index];
-
+    if (inputString == "lambda") {
+      return this.graph[this.initialState].isFinal
     }
+    return this.isAccept(inputString, this.initialState, 0)
   }
 
   createEquivalentDFA() {
