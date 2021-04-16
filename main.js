@@ -3,7 +3,7 @@ function main()
   var data = document.forms["form"];
   var string = data["String"].value;
   var nfa = new NFA(data["states"].value.split(","), data["alphabet"].value.split(","), data["FinalStates"].value.split(","), data["GrammerRules"].value.split("\n"));
-  debugger;
+  
   
   if(document.getElementById("IsAcceptedByDFA").checked)
   {

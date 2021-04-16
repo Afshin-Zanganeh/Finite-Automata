@@ -1,5 +1,6 @@
-class NFA extends DFA {
- 
+class NFA extends DFA 
+{
+  
   isAcceptByNFA(inputString) 
   {
     console.log(this.states)
