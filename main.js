@@ -4,20 +4,20 @@ function main()
   var string = data["String"].value;
 
   var nfa = new NFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
-
+  var dfa = new DFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
   
   if(document.getElementById("IsAcceptedByDFA").checked)
   {
-    alert(nfa.IsAcceptedByDFA(string));
+    alert(dfa.IsAcceptedByDFA(string));
   }
 
   else if(document.getElementById("MakeSimpleDFA").checked)
   {
-    nfa.MakeSimpleDFA();
+    dfa.MakeSimpleDFA();
   }
   else if(document.getElementById("ShowSchematicDFA").checked)
   {
-    nfa.ShowSchematic();
+    dfa.ShowSchematic();
   }
 
   else if(document.getElementById("IsAcceptedByNFA").checked)

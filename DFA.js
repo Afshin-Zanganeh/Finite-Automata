@@ -162,14 +162,66 @@ class DFA
         break;
       }
       
-      debugger;
       p0 = p1;
       p1 = [];
+      
+    }
+    
+    
+    var minimized_states = [];
+    var minimized_final_states = [];
+    var minimized_transitions = [];
 
+    for(var item of p0)
+    {
+      minimized_states.push(JSON.stringify(item));
     }
 
-    return p0;
+    for(var final of this.final_states)
+    {
+      if(minimized_final_states.includes(JSON.stringify(item)))
+      {
+        continue;
+      }
+      for(var item of p0)
+      {
+        if( item.includes(final))
+        {
+          minimized_final_states.push(JSON.stringify(item));
+          break;
+        }
+      }
+    }
 
+    for(var trans of this.transitions)
+    {
+      trans = trans.split(",")
+      for(var start of p0)
+      {
+        if(start.includes(trans[0]))
+        {
+          for(var dest of p0)
+          {
+            if(dest.includes(trans[1]))
+            {
+              var tmp_trans = "";
+              tmp_trans += JSON.stringify(start) + ",";
+              tmp_trans += JSON.stringify(dest) + ",";
+              tmp_trans += trans[2];
+
+              if(!minimized_transitions.includes(tmp_trans))
+              {
+                minimized_transitions.push(tmp_trans);
+              }
+              
+            }
+          }
+        }
+      }
+    }
+
+    var minimized_graph = {"minimized_states" : minimized_states , "minimized_final_states": minimized_final_states , "minimized_transitions": minimized_transitions};
+    return minimized_graph; 
   }
 
   check_2D_arr_same(a,b)
@@ -194,7 +246,7 @@ class DFA
   Are_states_same(s0,s1,partition)
   {
     var count =0;
-    for(var letter of this.alphabet)
+    for(var letter of this.alphabets)
     {
       var s0_ways = this.graph[s0];
       var s1_ways = this.graph[s1];
@@ -229,7 +281,7 @@ class DFA
       }
     }
 
-    if(count == this.alphabet.length)
+    if(count == this.alphabets.length)
     {
       return true;
     }
@@ -282,7 +334,7 @@ class DFA
     let states = document.getElementById("States").value
     states = states.split(",")
     let initialState = states[0]
-    let alphabets = document.getElementById("Alphabets").value
+    let alphabets = document.getElementById("alphabets").value
     alphabets = alphabets.split(",")
     let finalStates = document.getElementById("FinalStates").value
     finalStates = finalStates.split(",")
