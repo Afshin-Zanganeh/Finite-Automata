@@ -3,7 +3,8 @@ function main()
   var data = document.forms["form"];
   var string = data["String"].value;
 
-  var nfa = new NFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
+  //var nfa = new NFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
+  var nfa = new NFA();
   var dfa = new DFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
   
   if(document.getElementById("IsAcceptedByDFA").checked)

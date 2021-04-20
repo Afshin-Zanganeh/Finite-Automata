@@ -76,7 +76,7 @@ class NFA {
   }
 
   showSchematicNFA() {
-
+    
   }
 
 }
