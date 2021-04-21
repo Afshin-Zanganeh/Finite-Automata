@@ -202,4 +202,4 @@ class NFA {
   }
 
 }
->>>>>>> 50ddc5d99ae6a1e3efa99e9444be003f85b5cc17
+

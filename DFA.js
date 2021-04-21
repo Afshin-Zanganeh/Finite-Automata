@@ -35,39 +35,31 @@ class DFA {
 
 
   IsAcceptedByDFA(string) {
-
+    debugger;
     var current_state = this.states[0];
     var flag = true;
     var ways;
-    for (var letter of string) {
+    for (var letter of string) 
+    {
       // in each step flag should be true to be sure thst for each letter we have a way from current state to another state if we dont have DFA rejects esle we continue
-      if (!flag) {
+      if (!flag) 
+      {
         break;
       }
 
       flag = false;
       ways = this.graph[current_state];
-      for (var way of ways) {
-        if (letter == way[1]) {
+      for (var way of ways) 
+      {
+        if (letter == way[1]) 
+        {
           flag = true;
           current_state = way[0];
 
           break;
         }
+      }
 
-        flag = false;
-        ways = this.graph[current_state];
-        for (var way of ways) {
-          if (letter == way[1]) {
-            flag = true;
-            current_state = way[0];
-            break;
-          }
-        }
-      }
-      if (flag == true && this.final_states.includes(current_state)) {
-        return true;
-      }
 
     }
     if (flag == true && this.final_states.includes(current_state)) {
