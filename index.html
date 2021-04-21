@@ -1,88 +1,99 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- vis.js cdn -->
-    <script src="https://unpkg.com/vis-network@9.0.4/standalone/umd/vis-network.min.js"></script>
+  <!-- vis.js cdn -->
+  <script src="https://unpkg.com/vis-network@9.0.4/standalone/umd/vis-network.min.js"></script>
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
 
-    <script src = "./DFA.js"></script>
+  <script src="./DFA.js"></script>
 
-    <script src = "./NFA.js"></script>
+  <script src="./NFA.js"></script>
 
-    <script src = "./main.js"></script>
+  <script src="./main.js"></script>
 
 </head>
+
 <body>
-  
+
   <div class="container-fluid col-md-10 col-md-offset-1" style="margin-top: 30px;">
     <form name="form">
       <div class="form-group">
         <label for="States">States</label>
-        <input type="text" class="form-control" style="border-color:green;" id="States" name="states" placeholder="States" required>
+        <input type="text" class="form-control" style="border-color:green;" id="States" name="states"
+          placeholder="States" required>
       </div>
       <div class="form-group">
         <label for="Alphabets">Alphabets</label>
-        <input type="text" class="form-control" style="border-color:green;" id="Alphabets" name="Alphabets" placeholder="Alphabets" required>
-      </div>      
+        <input type="text" class="form-control" style="border-color:green;" id="Alphabets" name="Alphabets"
+          placeholder="Alphabets" required>
+      </div>
       <div class="form-group">
         <label for="FinalStates">Final States</label>
-        <input type="text" class="form-control" style="border-color:green;" id="FinalStates" name="FinalStates" placeholder="Final States" required>
-      </div> 
+        <input type="text" class="form-control" style="border-color:green;" id="FinalStates" name="FinalStates"
+          placeholder="Final States" required>
+      </div>
       <div class="form-group">
         <label for="NumberOfRules">Number of Rules</label>
-        <input type="text" class="form-control" style="border-color:green;" id="NumberOfRules" name="NumberOfRules" placeholder="Number of Rules" required>
-      </div> 
+        <input type="text" class="form-control" style="border-color:green;" id="NumberOfRules" name="NumberOfRules"
+          placeholder="Number of Rules" required>
+      </div>
       <div class="form-group">
         <label for="Transitions">Transitions</label>
-        <textarea rows="5" class="form-control" style="border-color:green;" id="Transitions" name="Transitions" placeholder="Transitions" required></textarea>
+        <textarea rows="5" class="form-control" style="border-color:green;" id="Transitions" name="Transitions"
+          placeholder="Transitions" required></textarea>
       </div>
       <div class="form-group">
         <label for="String">Your String</label>
-        <textarea rows="1" class="form-control" style="border-color:green;" id="String" name="String" placeholder="Your String" required></textarea>
+        <textarea rows="1" class="form-control" style="border-color:green;" id="String" name="String"
+          placeholder="Your String" required></textarea>
       </div>
     </form>
-    
-    <div  style="margin-top: 80px; margin-bottom: 40px; border:1px solid green; padding:20px; border-radius:25px;">
+
+    <div style="margin-top: 80px; margin-bottom: 40px; border:1px solid green; padding:20px; border-radius:25px;">
       <label>DFA</lable><br><br>
-        
+
         <form name="FA" id="FA">
           <input type="radio" id="IsAcceptedByDFA" name="FAMethod" value="IsAcceptedByDFA">
           <label for="IsAcceptedByDFA">Is Accepted By DFA ?</label><br>
           <input type="radio" id="MakeSimpleDFA" name="FAMethod" value="MakeSimpleDFA">
           <label for="MakeSimpleDFA">Make Simple DFA</label><br>
           <input type="radio" id="ShowSchematicDFA" name="FAMethod" value="ShowSchematicDFA">
-          <label for="other">Show Schematic DFA</label><br>
-          
+          <label for="ShowSchematicDFA">Show Schematic DFA</label><br>
+
           <label style="margin-top: 60px;">NFA</lable><br><br>
             <input type="radio" id="IsAcceptedByNFA" name="FAMethod" value="IsAcceptedByNFA">
             <label for="IsAcceptedByNFA">Is Accepted By NFA ?</label><br>
             <input type="radio" id="CreateEquivalenceDFA" name="FAMethod" value="CreateEquivalenceDFA">
-            <label for="MakeSimpleDFA">Create Equivalence DFA</label><br>
+            <label for="CreateEquivalenceDFA">Create Equivalence DFA</label><br>
             <input type="radio" id="FindRegExp" name="FAMethod" value="FindRegExp">
-            <label for="other">Find RegExp</label><br>
+            <label for="FindRegExp">Find RegExp</label><br>
             <input type="radio" id="ShowSchematicNFA" name="FAMethod" value="ShowSchematicNFA">
-            <label for="other">Show Schematic NFA</label>
-          </form>
-      </div>
-      <button  class="btn btn-success btn-block" style="margin-top: 20px; margin-bottom: 30px;" onclick="return main();">Run</button>
-        
-    <div id="graphContainer"></div>
+            <label for="ShowSchematicNFA">Show Schematic NFA</label>
+        </form>
+    </div>
+    <button class="btn btn-success btn-block" style="margin-top: 20px; margin-bottom: 30px;"
+      onclick="return main();">Run</button>
 
+    <div id="graphContainer"></div>
   </div>
 
 </body>
+
 </html>
-
-

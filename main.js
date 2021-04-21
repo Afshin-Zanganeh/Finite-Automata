@@ -1,44 +1,39 @@
-function main()
-{
-  var data = document.forms["form"];
-  var string = data["String"].value;
+function main() {
+  let states = document.getElementById("States").value.split(",").map(item => item.trim())
+  let alphabets = document.getElementById("Alphabets").value.split(",").map(item => item.trim())
+  let finalStates = document.getElementById("FinalStates").value.split(",").map(item => item.trim())
+  let numberOfTransitions = document.getElementById("NumberOfRules").value
+  let transitions = document.getElementById("Transitions").value.split("\n")
+  let string = document.getElementById("String").value
 
-  //var nfa = new NFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
-  var nfa = new NFA();
-  var dfa = new DFA(data["states"].value.split(","), data["Alphabets"].value.split(","), data["FinalStates"].value.split(","), data["Transitions"].value.split("\n"));
-  
-  if(document.getElementById("IsAcceptedByDFA").checked)
-  {
+  let nfa = new NFA(states, alphabets, finalStates, transitions, numberOfTransitions);
+  let dfa = new DFA(states, alphabets, finalStates, transitions, numberOfTransitions);
+
+  if (document.getElementById("IsAcceptedByDFA").checked) {
     alert(dfa.IsAcceptedByDFA(string));
   }
 
-  else if(document.getElementById("MakeSimpleDFA").checked)
-  {
+  else if (document.getElementById("MakeSimpleDFA").checked) {
     dfa.MakeSimpleDFA();
   }
-  else if(document.getElementById("ShowSchematicDFA").checked)
-  {
-    dfa.ShowSchematic();
+  else if (document.getElementById("ShowSchematicDFA").checked) {
+    dfa.showSchematicDFA(transitions, states[0], finalStates, "graphContainer")
   }
 
-  else if(document.getElementById("IsAcceptedByNFA").checked)
-  {
+  else if (document.getElementById("IsAcceptedByNFA").checked) {
     alert(nfa.isAcceptByNFA(string));
   }
 
-  else if(document.getElementById("CreateEquivalenceDFA").checked)
-  {
+  else if (document.getElementById("CreateEquivalenceDFA").checked) {
     nfa.createEquivalentDFA();
   }
 
-  else if(document.getElementById("FindRegExp").checked)
-  {
+  else if (document.getElementById("FindRegExp").checked) {
     alert(nfa.FindRegExp());
   }
 
-  else if(document.getElementById("ShowSchematicNFA").checked)
-  {
-    nfa.ShowSchematic();
+  else if (document.getElementById("ShowSchematicNFA").checked) {
+    nfa.showSchematicNFA(transitions, states[0], finalStates, "graphContainer")
   }
 
 
