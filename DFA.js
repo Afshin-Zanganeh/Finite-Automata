@@ -1,75 +1,64 @@
 class DFA {
-  constructor(states, alphabets, final_states, transitions, numberOfTransitions) {
 
-    this.states = states;
-    this.alphabets = alphabets;
-    this.final_states = final_states;
-    this.transitions = transitions;
+  constructor(states, alphabets, finalStates, transitions, numberOfTransitions) {
+    this.states = states
+    this.initialState = this.states[0]
+    this.alphabets = alphabets
+    this.finalStates = finalStates
     this.numberOfTransitions = numberOfTransitions
-    this.graph = this.CreateGraph();
+    this.transitions = transitions
+    this.createGraph()
   }
 
-  CreateGraph() {
-    var graph = {};
+  createGraph() {
+    this.graph = {}
     this.transitions.forEach(x => {
       var rule = x.split(",").map(item => item.trim())
-      if (this.final_states.includes(rule[1])) {
+      if (this.finalStates.includes(rule[1])) {
         try {
-          graph[rule[0]].push([rule[1], rule[2], 1]);
+          this.graph[rule[0]].push([rule[1], rule[2], 1])
         }
         catch (err) {
-          graph[rule[0]] = [[rule[1], rule[2], 1]];
+          this.graph[rule[0]] = [[rule[1], rule[2], 1]]
         }
       }
       else {
         try {
-          graph[rule[0]].push([rule[1], rule[2], 0]);
+          this.graph[rule[0]].push([rule[1], rule[2], 0])
         }
         catch (err) {
-          graph[rule[0]] = [[rule[1], rule[2], 0]];
+          this.graph[rule[0]] = [[rule[1], rule[2], 0]]
         }
       }
     })
-    return graph;
   }
 
-
-  IsAcceptedByDFA(string) {
-    debugger;
+  isAcceptedByDFA(string) {
     var current_state = this.states[0];
     var flag = true;
     var ways;
-    for (var letter of string) 
-    {
+    for (var letter of string) {
       // in each step flag should be true to be sure thst for each letter we have a way from current state to another state if we dont have DFA rejects esle we continue
-      if (!flag) 
-      {
+      if (!flag) {
         break;
       }
-
       flag = false;
       ways = this.graph[current_state];
-      for (var way of ways) 
-      {
-        if (letter == way[1]) 
-        {
+      for (var way of ways) {
+        if (letter == way[1]) {
           flag = true;
           current_state = way[0];
-
           break;
         }
       }
-
-
     }
-    if (flag == true && this.final_states.includes(current_state)) {
+    if (flag == true && this.finalStates.includes(current_state)) {
       return true;
     }
     return false
   }
 
-  MakeSimpleDFA() {
-
+  makeSimpleDFA() {
     Array.prototype.remove = function () {
       var what, a = arguments, L = a.length, ax;
       while (L && this.length) {
@@ -96,21 +85,17 @@ class DFA {
       // returns values of differenceSet
       return differenceSet;
     }
-
-
-    var state_set = this.states;
-    var final_set = this.final_states;
+    var state_set = this.BFS(this.graph, this.states, this.initialState);
+    var final_set = this.finalStates;
     var non_final_set = state_set.difference(final_set);
     var state_flag = {};
     var p0 = [non_final_set, final_set];
     var p1 = [];
 
     while (true) {
-
       for (var item of state_set) {
         state_flag[item] = false;
       }
-
       var p0_tmp = [];
       for (var i = 0; i < p0.length; i++) {
         var tmp_set = [];
@@ -119,53 +104,44 @@ class DFA {
         }
         p0_tmp.push(tmp_set);
       }
-
       for (var partition of p0_tmp) {
         for (var item of partition) {
           var tmp = [];
           var flag = false;
-          for (var item2 of partition.difference(item)) {
+          for (var item2 of partition.difference([item])) {
             if ((!state_flag[item]) && (!state_flag[item2]) && this.Are_states_same(item, item2, p0)) {
               flag = true;
               tmp.push(item2);
               state_flag[item2] = true;
             }
           }
-
           if (!flag && !state_flag[item]) {
             tmp.push(item);
             state_flag[item] = true;
             p1.push(tmp);
             tmp = [];
           }
-
           if (tmp.length != 0) {
             tmp.push(item);
             state_flag[item] = true;
             p1.push(tmp);
           }
-
         }
       }
-
       if (this.check_2D_arr_same(p1, p0)) {
         break;
       }
-
       p0 = p1;
       p1 = [];
-
+      debugger;
     }
-
     var minimized_states = [];
     var minimized_final_states = [];
     var minimized_transitions = [];
-
     for (var item of p0) {
       minimized_states.push(JSON.stringify(item));
     }
-
-    for (var final of this.final_states) {
+    for (var final of this.finalStates) {
       if (minimized_final_states.includes(JSON.stringify(final))) {
         continue;
       }
@@ -176,8 +152,6 @@ class DFA {
         }
       }
     }
-
-
     for (var trans of this.transitions) {
       trans = trans.split(",").map(item => item.trim())
       for (var start of p0) {
@@ -188,11 +162,9 @@ class DFA {
               tmp_trans += JSON.stringify(start) + "%";
               tmp_trans += JSON.stringify(dest) + "%";
               tmp_trans += trans[2];
-
               if (!minimized_transitions.includes(tmp_trans)) {
                 minimized_transitions.push(tmp_trans);
               }
-
             }
           }
         }
@@ -224,14 +196,15 @@ class DFA {
       label = label.replaceAll("[", "").replaceAll("]", "").replaceAll("\"", "").replaceAll(",", " ")
       transitions.push(`${from}, ${to}, ${label}`)
     })
+    console.log(transitions)
+    console.log(initialState)
+    console.log(finalStates)
     this.showSchematicDFA(transitions, initialState, finalStates, "graphContainer")
   }
-
   check_2D_arr_same(a, b) {
     if (a.length != b.length) {
       return false;
     }
-
     for (var i = 0; i < a.length; i++) {
       a[i].sort();
       b[i].sort();
@@ -241,7 +214,6 @@ class DFA {
     }
     return true;
   }
-
   Are_states_same(s0, s1, partition) {
     var count = 0;
     for (var letter of this.alphabets) {
@@ -256,14 +228,12 @@ class DFA {
           break;
         }
       }
-
       for (var item2 of s1_ways) {
         if (item2[1] == letter) {
           q1 = item2[0];
           break;
         }
       }
-
       for (var subset of partition) {
         if (subset.includes(q0) && subset.includes(q1)) {
           count += 1;
@@ -271,12 +241,36 @@ class DFA {
         }
       }
     }
-
     if (count == this.alphabets.length) {
       return true;
     }
-
     return false;
+  }
+
+  BFS(graph, states, s) {
+    var visited = {}
+    for (var item of states) {
+      visited[item] = false;
+    }
+    var queue = []
+    queue.push(s)
+    visited[s] = true
+    while (queue.length != 0) {
+      s = queue.pop()
+      graph[s].forEach(element => {
+        if (!visited[element[0]]) {
+          queue.push(element[0])
+          visited[element[0]] = true;
+        }
+      })
+    }
+    var visible_states = []
+    for (var item of states) {
+      if (visited[item]) {
+        visible_states.push(item);
+      }
+    }
+    return visible_states;
   }
 
   buildDotData(transitions, initialState, finalStates) {
@@ -288,7 +282,13 @@ class DFA {
     transitions.forEach(element => {
       element = element.split(",").map(item => item.trim())
       let from = element[0]
+      if (from == "") {
+        from = "trap"
+      }
       let to = element[1]
+      if (to == "") {
+        to = "trap"
+      }
       let label = element[2]
       if (label == "") {
         label = "lambda"
@@ -335,7 +335,6 @@ class DFA {
       },
     };
     let network = new vis.Network(container, data, options)
-
   }
 
 }

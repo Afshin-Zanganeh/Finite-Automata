@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>finite automata</title>
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -35,34 +35,34 @@
   <div class="container-fluid col-md-10 col-md-offset-1" style="margin-top: 30px;">
     <form name="form">
       <div class="form-group">
-        <label for="States">States</label>
-        <input type="text" class="form-control" style="border-color:green;" id="States" name="states"
-          placeholder="States" required>
+        <label for="states">States:</label>
+        <input type="text" class="form-control" style="border-color:green;" id="states" name="states"
+          placeholder="states" required>
       </div>
       <div class="form-group">
-        <label for="Alphabets">Alphabets</label>
-        <input type="text" class="form-control" style="border-color:green;" id="Alphabets" name="Alphabets"
-          placeholder="Alphabets" required>
+        <label for="alphabets">Alphabets:</label>
+        <input type="text" class="form-control" style="border-color:green;" id="alphabets" name="alphabets"
+          placeholder="alphabets" required>
       </div>
       <div class="form-group">
-        <label for="FinalStates">Final States</label>
-        <input type="text" class="form-control" style="border-color:green;" id="FinalStates" name="FinalStates"
-          placeholder="Final States" required>
+        <label for="finalStates">Final States:</label>
+        <input type="text" class="form-control" style="border-color:green;" id="finalStates" name="finalStates"
+          placeholder="final states" required>
       </div>
       <div class="form-group">
-        <label for="NumberOfRules">Number of Rules</label>
-        <input type="text" class="form-control" style="border-color:green;" id="NumberOfRules" name="NumberOfRules"
-          placeholder="Number of Rules" required>
+        <label for="numberOfTransitions">Number of Transitions:</label>
+        <input type="text" class="form-control" style="border-color:green;" id="numberOfTransitions"
+          name="numberOfTransitions" placeholder="number of transitions" required>
       </div>
       <div class="form-group">
-        <label for="Transitions">Transitions</label>
-        <textarea rows="5" class="form-control" style="border-color:green;" id="Transitions" name="Transitions"
-          placeholder="Transitions" required></textarea>
+        <label for="transitions">Transitions</label>
+        <textarea rows="5" class="form-control" style="border-color:green;" id="transitions" name="transitions"
+          placeholder="transitions" required></textarea>
       </div>
       <div class="form-group">
-        <label for="String">Your String</label>
-        <textarea rows="1" class="form-control" style="border-color:green;" id="String" name="String"
-          placeholder="Your String" required></textarea>
+        <label for="string">Your Input String:</label>
+        <textarea rows="1" class="form-control" style="border-color:green;" id="string" name="string"
+          placeholder="your string" required></textarea>
       </div>
     </form>
 
@@ -70,22 +70,22 @@
       <label>DFA</lable><br><br>
 
         <form name="FA" id="FA">
-          <input type="radio" id="IsAcceptedByDFA" name="FAMethod" value="IsAcceptedByDFA">
-          <label for="IsAcceptedByDFA">Is Accepted By DFA ?</label><br>
-          <input type="radio" id="MakeSimpleDFA" name="FAMethod" value="MakeSimpleDFA">
-          <label for="MakeSimpleDFA">Make Simple DFA</label><br>
-          <input type="radio" id="ShowSchematicDFA" name="FAMethod" value="ShowSchematicDFA">
-          <label for="ShowSchematicDFA">Show Schematic DFA</label><br>
+          <input type="radio" id="isAcceptedByDFA" name="FAMethod" value="isAcceptedByDFA">
+          <label for="isAcceptedByDFA">Is Accepted By DFA ?</label><br>
+          <input type="radio" id="makeSimpleDFA" name="FAMethod" value="makeSimpleDFA">
+          <label for="makeSimpleDFA">Make Simple DFA</label><br>
+          <input type="radio" id="showSchematicDFA" name="FAMethod" value="showSchematicDFA">
+          <label for="showSchematicDFA">Show Schematic DFA</label><br>
 
           <label style="margin-top: 60px;">NFA</lable><br><br>
-            <input type="radio" id="IsAcceptedByNFA" name="FAMethod" value="IsAcceptedByNFA">
-            <label for="IsAcceptedByNFA">Is Accepted By NFA ?</label><br>
-            <input type="radio" id="CreateEquivalenceDFA" name="FAMethod" value="CreateEquivalenceDFA">
-            <label for="CreateEquivalenceDFA">Create Equivalence DFA</label><br>
-            <input type="radio" id="FindRegExp" name="FAMethod" value="FindRegExp">
-            <label for="FindRegExp">Find RegExp</label><br>
-            <input type="radio" id="ShowSchematicNFA" name="FAMethod" value="ShowSchematicNFA">
-            <label for="ShowSchematicNFA">Show Schematic NFA</label>
+            <input type="radio" id="isAcceptedByNFA" name="FAMethod" value="isAcceptedByNFA">
+            <label for="isAcceptedByNFA">Is Accepted By NFA ?</label><br>
+            <input type="radio" id="createEquivalentDFA" name="FAMethod" value="createEquivalentDFA">
+            <label for="createEquivalentDFA">Create Equivalent DFA</label><br>
+            <input type="radio" id="findRegExp" name="FAMethod" value="findRegExp">
+            <label for="findRegExp">Find RegExp</label><br>
+            <input type="radio" id="showSchematicNFA" name="FAMethod" value="showSchematicNFA">
+            <label for="showSchematicNFA">Show Schematic NFA</label>
         </form>
     </div>
     <button class="btn btn-success btn-block" style="margin-top: 20px; margin-bottom: 30px;"

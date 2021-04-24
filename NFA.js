@@ -8,7 +8,6 @@ class NFA {
     this.numberOfTransitions = numberOfTransitions
     this.transitions = transitions
     this.createGraph()
-    // console.log(this.graph)
   }
 
   createGraph() {
@@ -67,9 +66,6 @@ class NFA {
     return this.isAccept(inputString, this.initialState, 0)
   }
 
-
-
-
   deltaStar(currentState, char) {
     if (currentState == "") {
       return [""]
@@ -94,13 +90,15 @@ class NFA {
     return [...nextStates]
   }
 
-  createEquivalentDFA() {
+  createEquivalentDFA(print_bool) {
     this.graphDFA = {}
     this.initialStateDFA = this.initialState
     let queue = []
+    this.statesDFA = new Set()
     queue.push(this.initialStateDFA)
     while (queue.length != 0) {
       let currentStates = queue.pop()
+      this.statesDFA.add(currentStates)
       this.graphDFA[currentStates] = { "isFinal": false, "adjs": [] }
       currentStates = currentStates.split(" ")
       this.alphabets.forEach(alphabet => {
@@ -121,14 +119,14 @@ class NFA {
       })
     }
     this.transitionsDFA = []
-    for (const [ key, value ] of Object.entries(this.graphDFA)) {
+    for (const [key, value] of Object.entries(this.graphDFA)) {
       this.graphDFA[key].adjs.forEach(element => {
         this.transitionsDFA.push(`${key}, ${element[0]}, ${element[1]}`)
       })
     }
     this.finalStatesDFA = new Set()
     this.finalStates.forEach(finalState => {
-      for (const [ key, value ] of Object.entries(this.graphDFA)) {
+      for (const [key, value] of Object.entries(this.graphDFA)) {
         if (key.split(" ").includes(finalState)) {
           this.graphDFA[key].isFinal = true
           this.finalStatesDFA.add(key)
@@ -136,11 +134,15 @@ class NFA {
       }
     })
     this.finalStatesDFA = [...this.finalStatesDFA]
-    // console.log(this.transitionsDFA)
-    // console.log(this.initialStateDFA)
-    // console.log(this.finalStatesDFA)
-    // console.log(this.graphDFA)
-    this.showSchematicNFA(this.transitionsDFA, this.initialStateDFA, this.finalStatesDFA, "graphContainer")
+    this.statesDFA = [...this.statesDFA]
+    if (print_bool) {
+      console.log(this.transitionsDFA)
+      console.log(this.initialStateDFA)
+      console.log(this.finalStatesDFA)
+      console.log(this.statesDFA)
+      console.log(this.graphDFA)
+      this.showSchematicNFA(this.transitionsDFA, this.initialStateDFA, this.finalStatesDFA, "graphContainer")
+    }
   }
 
   buildDotData(transitions, initialState, finalStates) {
@@ -152,7 +154,13 @@ class NFA {
     transitions.forEach(element => {
       element = element.split(",").map(item => item.trim())
       let from = element[0]
+      if (from == "") {
+        from = "trap"
+      }
       let to = element[1]
+      if (to == "") {
+        to = "trap"
+      }
       let label = element[2]
       if (label == "") {
         label = "lambda"
@@ -202,4 +210,3 @@ class NFA {
   }
 
 }
-
