@@ -5,6 +5,9 @@ class DFA {
     this.initialState = this.states[0]
     this.alphabets = alphabets
     this.finalStates = finalStates
+    if (finalStates.length == 1 && finalStates[0] == "") {
+      this.finalStates = []
+    }
     this.numberOfTransitions = numberOfTransitions
     this.transitions = transitions
     this.createGraph()
@@ -274,13 +277,44 @@ class DFA {
   }
 
   buildDotData(transitions, initialState, finalStates) {
+    let newTransitionsDictionary = {}
+    transitions.forEach(element => {
+      element = element.split(",").map(item => item.trim())
+      let from = element[0]
+      if (from == "") {
+        from = "trap"
+      }
+      let to = element[1]
+      if (to == "") {
+        to = "trap"
+      }
+      let label = element[2]
+      if (label == "") {
+        label = "lambda"
+      }
+      if (!(from in newTransitionsDictionary)) {
+        newTransitionsDictionary[from] = {}
+      }
+      if (to in newTransitionsDictionary[from]) {
+        newTransitionsDictionary[from][to] += `,${label}`
+      } else {
+        newTransitionsDictionary[from][to] = label
+      }
+    })
+    let newTransitions = []
+    Object.entries(newTransitionsDictionary).forEach(([from, v]) => {
+      Object.entries(v).forEach(([to, label]) => {
+        newTransitions.push(`${from} % ${to} % ${label}`)
+      })
+    })
+
     let res = `digraph {
       node [shape=circle fontsize=25]
       edge [length=200, color=gray, fontcolor=black]`
     res += `
       hidden -> "${initialState}"[label=""]`
-    transitions.forEach(element => {
-      element = element.split(",").map(item => item.trim())
+    newTransitions.forEach(element => {
+      element = element.split("%").map(item => item.trim())
       let from = element[0]
       if (from == "") {
         from = "trap"

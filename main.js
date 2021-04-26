@@ -25,7 +25,7 @@ function main() {
     nfa.createEquivalentDFA(true)
   }
   else if (document.getElementById("findRegExp").checked) {
-    alert(nfa.FindRegExp())
+    alert(nfa.findRegExp())
   }
   else if (document.getElementById("showSchematicNFA").checked) {
     nfa.showSchematicNFA(transitions, states[0], finalStates, "graphContainer")
