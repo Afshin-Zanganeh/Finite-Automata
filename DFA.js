@@ -136,7 +136,6 @@ class DFA {
       }
       p0 = p1;
       p1 = [];
-      debugger;
     }
     var minimized_states = [];
     var minimized_final_states = [];
